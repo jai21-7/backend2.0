@@ -1,10 +1,16 @@
 import mongoose from "mongoose";
 import { DB_NAME } from "./constants";
 
+import express from "express"
+const app = express()
 
 ( async () => {
     try {
-        mongoose.connect(`${process.env.MONGODB_URL})/${DB_NAME}`)
+     await   mongoose.connect(`${process.env.MONGODB_URL})/${DB_NAME}`)
+     app.on("error",() => {
+        console.log("ERROR:", error);
+        throw error
+     })
     }catch (error) {
         console.error("ERROR: ", error)
         throw error
